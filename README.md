@@ -1,4 +1,5 @@
-#Java problem to solve before interviews.
+# java-interview-test
+Java problem to solve before interviews.
 
 - Clone the repository. 
 - Open in eclipse as a workspace.
