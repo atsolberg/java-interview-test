@@ -20,7 +20,8 @@ public class PersonToPersonTreeNodeConverterTest {
 
     @Before
     public void setUp() throws Exception {
-        allEmployees = new ArrayList<Person>();
+        
+        allEmployees = new ArrayList<>();
 
         Person kirk = new Person("Kirk", null);
         allEmployees.add(kirk);
@@ -46,23 +47,23 @@ public class PersonToPersonTreeNodeConverterTest {
     }
     
     private static String outputFlatTree(PersonTreeNode treeNode) {
-    	
+        
         String result = treeNode.getPerson().getName();
         boolean first = true;
         
         if (!treeNode.getDirectReports().isEmpty()) {
             
-        	result += "{";
+            result += "{";
             List<PersonTreeNode> directReports = treeNode.getDirectReports();
             List<PersonTreeNode> sortedDirectReports = new ArrayList<PersonTreeNode>(directReports);
             
             Collections.sort(sortedDirectReports, new Comparator<PersonTreeNode>() {
-            	@Override
-            	public int compare(PersonTreeNode o1, PersonTreeNode o2) {
-            		return String.CASE_INSENSITIVE_ORDER.compare(o1.getPerson().getName(), o2.getPerson().getName());
-            	}
+                @Override
+                public int compare(PersonTreeNode o1, PersonTreeNode o2) {
+                    return String.CASE_INSENSITIVE_ORDER.compare(o1.getPerson().getName(), o2.getPerson().getName());
+                }
             });
-		
+        
             for (PersonTreeNode childNode : sortedDirectReports) {
                 if (!first) {
                     result +=",";
@@ -83,10 +84,10 @@ public class PersonToPersonTreeNodeConverterTest {
      */
     @Test
     public void testGenerateTree() {
-    	
-    	ArrayList<Person> shuffledList = new ArrayList<Person>(allEmployees);
-    	Collections.shuffle(shuffledList);
-    	
+        
+        ArrayList<Person> shuffledList = new ArrayList<>(allEmployees);
+        Collections.shuffle(shuffledList);
+        
         PersonTreeNode rootNode = new PersonToPersonTreeNodeConverter().generateTree(shuffledList);
         
         Assert.assertNotNull(rootNode);
