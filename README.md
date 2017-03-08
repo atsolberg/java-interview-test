@@ -1,5 +1,5 @@
-# java-interview-test-solution
-Java problem to solve before interviews. Solution is included.
+# java-interview-test
+Java problem to solve before interviews.
 
 - Clone the repository. 
 - Import in IntelliJ as a 'new project from existing sources'.
