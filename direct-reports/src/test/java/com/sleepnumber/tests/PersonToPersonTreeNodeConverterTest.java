@@ -1,18 +1,15 @@
-package tests;
+package com.sleepnumber.tests;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import model.Person;
-import model.PersonTreeNode;
-
+import com.sleepnumber.app.converter.PersonToPersonTreeNodeConverter;
+import com.sleepnumber.app.model.Person;
+import com.sleepnumber.app.model.PersonTreeNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import converter.PersonToPersonTreeNodeConverter;
 
 public class PersonToPersonTreeNodeConverterTest {
 
@@ -55,14 +52,10 @@ public class PersonToPersonTreeNodeConverterTest {
             
             result += "{";
             List<PersonTreeNode> directReports = treeNode.getDirectReports();
-            List<PersonTreeNode> sortedDirectReports = new ArrayList<PersonTreeNode>(directReports);
+            List<PersonTreeNode> sortedDirectReports = new ArrayList<>(directReports);
             
-            Collections.sort(sortedDirectReports, new Comparator<PersonTreeNode>() {
-                @Override
-                public int compare(PersonTreeNode o1, PersonTreeNode o2) {
-                    return String.CASE_INSENSITIVE_ORDER.compare(o1.getPerson().getName(), o2.getPerson().getName());
-                }
-            });
+            sortedDirectReports.sort((o1, o2) ->
+                    String.CASE_INSENSITIVE_ORDER.compare(o1.getPerson().getName(), o2.getPerson().getName()));
         
             for (PersonTreeNode childNode : sortedDirectReports) {
                 if (!first) {
@@ -90,13 +83,13 @@ public class PersonToPersonTreeNodeConverterTest {
         
         PersonTreeNode rootNode = new PersonToPersonTreeNodeConverter().generateTree(shuffledList);
         
-        Assert.assertNotNull(rootNode);
+        Assert.assertNotNull("Root tree node should not be null", rootNode);
         
-        Assert.assertEquals("Kirk", rootNode.getPerson().getName());
+        Assert.assertEquals("The ceo should have been Kirk", "Kirk", rootNode.getPerson().getName());
         
         String flatTree = outputFlatTree(rootNode);
         
-        Assert.assertEquals("Kirk{Mark{Tom{Ben{David},Nick{Corey,Stacey{Julie,Tom}}}}}", flatTree);
+        Assert.assertEquals("The org structure was incorrect", "Kirk{Mark{Tom{Ben{David},Nick{Corey,Stacey{Julie,Tom}}}}}", flatTree);
     }
 
 }

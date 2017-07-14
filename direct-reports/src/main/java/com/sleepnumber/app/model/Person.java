@@ -1,4 +1,4 @@
-package model;
+package com.sleepnumber.app.model;
 
 /**
  * Object to represent a person working at a company.

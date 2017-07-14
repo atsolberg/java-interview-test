@@ -1,7 +1,8 @@
-package converter;
+package com.sleepnumber.app.converter;
 
-import model.Person;
-import model.PersonTreeNode;
+
+import com.sleepnumber.app.model.Person;
+import com.sleepnumber.app.model.PersonTreeNode;
 
 /**
  * Instructions:

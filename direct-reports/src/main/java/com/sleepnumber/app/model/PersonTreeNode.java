@@ -1,4 +1,4 @@
-package model;
+package com.sleepnumber.app.model;
 
 import java.util.List;
 
